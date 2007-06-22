@@ -1,8 +1,8 @@
 %define	name	ceve
 %define	version	1.0
-%define	release	%mkrel 0.rc1.1
+%define	release	%mkrel 0.rc1.2
 
-Summary:	Dose components for EDOS Ceve
+Summary:	A generalized package metadata parser
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
