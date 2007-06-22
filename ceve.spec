@@ -10,6 +10,7 @@ URL:		http://edos-project.org/xwiki/bin/view/Main/Ceve
 License:	GPL
 Group:		Development/Other
 Source0:	%{name}-%{version}rc1.tar.gz
+Patch0:		ceve-1.0rc1-use-camlzip.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	ocaml ocaml-calendar-devel ocamlfind-mini ocamlduce
 BuildRequires:	ocaml-expat-devel edos-dose mysql-devel rpm-devel
@@ -20,17 +21,17 @@ package metadata in several different formats and, after some simple
 manipulations, output them in another format. 
 
 %prep
-%setup -q %{name}-%{version}rc1
+%setup -q -n %{name}-%{version}rc1
+%patch0 -p1 -b .camlzip
 
 %build
-make CFLAGS="-I%{_libdir}/ocaml -I/usr/include/rpm -I/usr/include/mysql" LDFLAGS="-L/usr/lib/mysql"  ceve.opt
+%make CFLAGS="%{optflags} -I%{_libdir}/ocaml -I/usr/include/rpm -I/usr/include/mysql" LDFLAGS="-L/usr/lib/mysql"  ceve ceve.opt
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/%{ocaml_sitelib}
-for i in util io mmap lifetime dosebase
-	do cd $i; make -I ../make install OCAMLFIND_INSTFLAGS="-destdir %{buildroot}%{ocaml_sitelib}"; cd -
-done
+install -m755 ceve -D %{buildroot}%{_bindir}/ceve
+install -m755 ceve.opt -D %{buildroot}%{_bindir}/ceve.opt
 
 %files
 %defattr(-,root,root)
+%{_bindir}/ceve*
