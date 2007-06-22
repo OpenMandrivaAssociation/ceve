@@ -1,6 +1,6 @@
 %define	name	ceve
 %define	version	1.0
-%define	release	%mkrel 0.rc1.2
+%define	release	%mkrel 0.rc1.1
 
 Summary:	A generalized package metadata parser
 Name:		%{name}
@@ -13,7 +13,8 @@ Source0:	%{name}-%{version}rc1.tar.gz
 Patch0:		ceve-1.0rc1-use-camlzip.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	ocaml ocaml-calendar-devel ocamlfind-mini ocamlduce
-BuildRequires:	ocaml-expat-devel edos-dose mysql-devel rpm-devel
+BuildRequires:	ocaml-expat-devel ocaml-camlzip-devel edos-dose
+BuildRequires:	mysql-devel rpm-devel
 
 %description
 Ceve is a generalized package metadata parser; i.e. it can read
