@@ -1,6 +1,6 @@
 %define	name	ceve
 %define	version	1.0
-%define	release	%mkrel 0.rc1.2
+%define	release	%mkrel 0.rc1.3
 
 Summary:	A generalized package metadata parser
 Name:		%{name}
@@ -33,6 +33,9 @@ rm -rf %{buildroot}
 install -m755 ceve -D %{buildroot}%{_bindir}/ceve
 install -m755 ceve.opt -D %{buildroot}%{_bindir}/ceve.opt
 
+install -m644 ceve.1 -D %buildroot%_mandir/man1/ceve.1
+
 %files
 %defattr(-,root,root)
 %{_bindir}/ceve*
+%_mandir/man1/ceve.1*
