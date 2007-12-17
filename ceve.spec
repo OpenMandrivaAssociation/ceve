@@ -11,7 +11,6 @@ License:	GPL
 Group:		Development/Other
 Source0:	%{name}-%{version}rc1.tar.gz
 Patch0:		ceve-1.0rc1-use-camlzip.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	ocaml ocaml-calendar-devel ocamlfind-mini ocamlduce
 BuildRequires:	ocaml-expat-devel ocaml-camlzip-devel edos-dose
 BuildRequires:	mysql-devel rpm-devel db-devel ncurses-devel
