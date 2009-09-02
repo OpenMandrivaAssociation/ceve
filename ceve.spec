@@ -1,6 +1,6 @@
 %define	name	ceve
 %define	version	1.0
-%define	release	%mkrel 0.rc1.3
+%define	release	%mkrel 0.rc1.4
 
 Summary:	A generalized package metadata parser
 Name:		%{name}
