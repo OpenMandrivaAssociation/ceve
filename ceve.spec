@@ -1,41 +1,37 @@
-%define	name	ceve
-%define	version	1.0
-%define	release	%mkrel 0.rc1.4
-
-Summary:	A generalized package metadata parser
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-URL:		http://edos-project.org/xwiki/bin/view/Main/Ceve
-License:	GPL
+Summary:	Generalized package metadata parser
+Name:		ceve
+Version:	1.4
+Release:	%mkrel 1
+URL:		http://gforge.inria.fr/projects/sodiac/
+License:	GPLv3+
 Group:		Development/Other
-Source0:	%{name}-%{version}rc1.tar.gz
-Patch0:		ceve-1.0rc1-use-camlzip.patch
+Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	ocaml ocaml-calendar-devel ocamlfind-mini ocamlduce
-BuildRequires:	ocaml-expat-devel ocaml-camlzip-devel edos-dose
-BuildRequires:	mysql-devel rpm-devel db-devel ncurses-devel
+#chrpath needed to remove invalid rpath : /usr/local/bin in ceve binary
+Buildrequires:  ocaml-dose2-devel chrpath
+Requires:       ocaml-dose2
 
 %description
-Ceve is a generalized package metadata parser; i.e. it can read
-package metadata in several different formats and, after some simple
-manipulations, output them in another format. 
+Ceve is a command line utility used to parse package metadata
+information (in particular package interrelationships such as
+dependencies) and convert them to set of constraints that need to be
+satisfied by a proper package installation.
 
 %prep
-%setup -q -n %{name}-%{version}rc1
-%patch0 -p1 -b .camlzip
+%setup -q
 
 %build
-%make CFLAGS="%{optflags} -I%{_libdir}/ocaml -I/usr/include/rpm -I/usr/include/mysql" LDFLAGS="-L/usr/lib/mysql"  ceve ceve.opt
+%make ceve.opt
+chrpath -d ceve.opt
 
 %install
 rm -rf %{buildroot}
-install -m755 ceve -D %{buildroot}%{_bindir}/ceve
-install -m755 ceve.opt -D %{buildroot}%{_bindir}/ceve.opt
 
-install -m644 ceve.1 -D %buildroot%_mandir/man1/ceve.1
+export EXCLUDE_FROM_STRIP=1
+install -m755 ceve.opt -D %{buildroot}%{_bindir}/ceve
+install -m644 ceve.1 -D %{buildroot}%{_mandir}/man1/ceve.1
 
 %files
 %defattr(-,root,root)
 %{_bindir}/ceve*
-%_mandir/man1/ceve.1*
+%{_mandir}/man1/ceve.1*
