@@ -2,7 +2,7 @@ Summary:	Generalized package metadata parser
 Name:		ceve
 Version:	1.4
 Release:	%mkrel 1
-URL:		http://gforge.inria.fr/projects/sodiac/
+URL:		https://gforge.inria.fr/projects/sodiac/
 License:	GPLv3+
 Group:		Development/Other
 Source0:	%{name}-%{version}.tar.gz
