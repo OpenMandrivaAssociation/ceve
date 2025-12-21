@@ -8,6 +8,7 @@ Group:		Development/Other
 Source0:	%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 #chrpath needed to remove invalid rpath : /usr/local/bin in ceve binary
+BuildRequires:	make
 Buildrequires:  ocaml-dose2-devel chrpath
 Requires:       ocaml-dose2
 
